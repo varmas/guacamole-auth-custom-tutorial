@@ -1,0 +1,9 @@
+# This is an example covering only the extension's required properties and format
+
+# Username and password
+tutorial-user:     tutorial
+tutorial-password: password
+
+# Connection information
+tutorial-protocol:   vnc
+tutorial-parameters: hostname=localhost, port=5900
