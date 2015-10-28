@@ -1,14 +1,11 @@
-
-se of this repo
+------------------------------------------------------------
+Purpose of this repo
 ------------------------------------------------------------
  This is just a repo to help devs diff the guacamole tutorial on custom authentication in the earliest commit, with my working version of the custom authentication with just a few minor changes on my latest commit with most changes due to the latest guacamole source code or eliminating deprecated classes.
-```
-```
+
 ------------------------------------------------------------
  As is Tutorial Compile errors as of 2015-10-28
 ------------------------------------------------------------
-``` 
-```
 [INFO] -------------------------------------------------------------
 [ERROR] COMPILATION ERROR :
 [INFO] -------------------------------------------------------------
@@ -19,13 +16,10 @@ se of this repo
     file does not contain class org.glyptodon.guacamole.auth.TutorialProperties
     Please remove or make sure it appears in the correct subdirectory of the sourcepath.
 [INFO] 3 errors
-```
-```
+
 ------------------------------------------------------------
  Latest Commit no compilation errors
 ------------------------------------------------------------
-``` 
-```
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
@@ -33,5 +27,3 @@ se of this repo
 [INFO] Finished at: 2015-10-28T12:28:07-04:00
 [INFO] Final Memory: 14M/293M
 [INFO] ------------------------------------------------------------------------
-```
-
