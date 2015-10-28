@@ -1,51 +1,60 @@
 package org.glyptodon.guacamole.auth;
 
 import java.util.Map;
+import java.util.HashMap;
 import org.glyptodon.guacamole.GuacamoleException;
 import org.glyptodon.guacamole.net.auth.simple.SimpleAuthenticationProvider;
 import org.glyptodon.guacamole.net.auth.Credentials;
 import org.glyptodon.guacamole.protocol.GuacamoleConfiguration;
+import org.glyptodon.guacamole.environment.Environment;
+import org.glyptodon.guacamole.environment.LocalEnvironment;
 
 public class TutorialAuthenticationProvider extends SimpleAuthenticationProvider {
+
+    private final Environment environment;
+
+    public TutorialAuthenticationProvider() throws GuacamoleException{
+        environment = new LocalEnvironment();
+    }
 
     @Override
     public Map<String, GuacamoleConfiguration>
         getAuthorizedConfigurations(Credentials credentials)
-        throws GuacamoleException {
+            throws GuacamoleException {
 
         // Get username
-        String username = GuacamoleProperties.getRequiredProperty(
-            TutorialProperties.TUTORIAL_USER
-        );      
+        String username = environment.getRequiredProperty(
+            TutorialGuacamoleProperties.TUTORIAL_USER
+        );
 
         // If wrong username, fail
         if (!username.equals(credentials.getUsername()))
             return null;
 
         // Get password
-        String password = GuacamoleProperties.getRequiredProperty(
-            TutorialProperties.TUTORIAL_PASSWORD
-        );      
+        String password = environment.getRequiredProperty(
+            TutorialGuacamoleProperties.TUTORIAL_PASSWORD
+        );
 
         // If wrong password, fail
         if (!password.equals(credentials.getPassword()))
             return null;
 
         // Successful login. Return configurations.
-        Map<String, GuacamoleConfiguration> configs = 
+        Map<String, GuacamoleConfiguration> configs =
             new HashMap<String, GuacamoleConfiguration>();
 
         // Create new configuration
         GuacamoleConfiguration config = new GuacamoleConfiguration();
 
         // Set protocol specified in properties
-        config.setProtocol(GuacamoleProperties.getRequiredProperty(
-            TutorialProperties.TUTORIAL_PROTOCOL
+        config.setProtocol(environment.getRequiredProperty(
+            TutorialGuacamoleProperties.TUTORIAL_PROTOCOL
         ));
 
         // Set all parameters, splitting at commas
-        for (String parameterValue : GuacamoleProperties.getRequiredProperty(
-            TutorialProperties.TUTORIAL_PARAMETERS
+        for (String parameterValue : environment.getRequiredProperty(
+            TutorialGuacamoleProperties.TUTORIAL_PARAMETERS
         ).split(",\\s*")) {
 
             // Find the equals sign
@@ -66,4 +75,10 @@ public class TutorialAuthenticationProvider extends SimpleAuthenticationProvider
         return configs;
 
     }
+
+    @Override
+    public String getIdentifier() {
+        return "tutorial";
+    }
 }
+
